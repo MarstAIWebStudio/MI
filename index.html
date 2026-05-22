@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 공인 MI 지능 지수 검사</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success-color: #4ade80;
+            --primary-blue: #2563eb;
+            --border-color: #1e293b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .app-container {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .screen {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px 60px 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .hidden { display: none !important; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .quiz-option-btn {
+            background: #1e293b;
+            color: var(--text-main);
+            border: 1px solid #334155;
+            padding: 22px 25px;
+            font-size: 1.05rem;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .quiz-option-btn:hover {
+            background: #334155;
+            border-color: #38bdf8;
+        }
+        .quiz-option-btn:active {
+            background: #475569;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-primary:active { opacity: 0.8; }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+        .spec-table th, .spec-table td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .spec-table th {
+            color: #64748b;
+            font-weight: 600;
+            width: 25%;
+        }
+
+        .result-score {
+            font-size: 4.5rem;
+            color: #38bdf8;
+            font-weight: 900;
+            margin: 20px 0 5px;
+            text-align: center;
+        }
+        .result-tier {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f59e0b;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-input:focus { border-color: #38bdf8; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- 1. 인트로 화면 -->
+        <div id="intro-screen" style="background: #ffffff; color: #1e293b; width: 100%;">
+            <div class="screen">
+                <div style="text-align: center; margin-bottom: 35px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px;">
+                    <span style="display: inline-block; padding: 8px 18px; background: #0f172a; border-radius: 6px; font-size: 0.8rem; font-weight: bold; color: #fff; letter-spacing: 2px;">IMEC INTERNATIONAL OFFICIAL REPORT</span>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px; font-family: monospace;">DOCUMENT CODE: IMEC-2026-MI-99A8-FULLFRAME</p>
+                </div>
+
+                <h1 style="color: #0f172a; font-size: 2.8rem; font-weight: 900; line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 20px;">2026 공인 MI 지능 지수 진단 명세서</h1>
+                
+                <p style="color: #475569; font-size: 1.05rem; line-height: 1.75; margin-bottom: 30px; word-break: keep-all; text-align: justify;">
+                    본 평가는 국제 표준 인지능력 검증원(IMEC)의 가이드라인에 의거하여 설계된 최고 등급 변별력 지능 진단 모듈입니다. **기본 문제 풀이 스코어(문항당 5점 / 최대 100점)**와 피검자의 레이턴시 가속 가중치를 환산한 **초정밀 소요 시간 가산점(최대 5점)**을 최종 연산 스왑하여 종합 평가 지수가 도출됩니다.
+                </p>
+
+                <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 30px;">
+
+                <h3 style="font-size: 1.3rem; color: #0f172a; margin-bottom: 12px; border-left: 5px solid #0f172a; padding-left: 10px;">📋 1. 검사 주관 및 시스템 개요</h3>
+                <table class="spec-table" style="margin-bottom: 35px;">
+                    <tr><th>평가 주관</th><td style="color:#0f172a; font-weight:700;">국제 인지능력 평가 연합 산하 고지능 연산 분과위원회</td></tr>
+                    <tr><th>시스템 아키텍처</th><td>MI-Hybrid Frame Engine v5.1 (2026 Perfect Edition)</td></tr>
+                    <tr><th>문항 구성 및 스케일</th><td>총 20개 문항 (기본 정답 100점 만점 + 타임 가산 보너스 5점 만점)</td></tr>
+                    <tr><th>평가 배점 가중치</th><td style="color: #2563eb; font-weight: bold;">정답당 5점 부여 + 소요 시간 연산 보정 최대 5점 합산</td></tr>
+                </table>
+
+                <button class="btn-primary" style="background: #0f172a; font-size: 1.25rem; padding: 22px;" onclick="startQuiz()">서약 동의 및 PC 풀프레임 검사 시작</button>
+            </div>
+        </div>
+
+        <!-- 2. 퀴즈 진행 화면 -->
+        <div id="quiz-screen" class="screen hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid #1e293b; padding-bottom: 18px;">
+                <span id="question-progress" style="color: var(--text-muted); font-size: 1.1rem; font-weight: bold;">문항: 1 / 20</span>
+                <span style="color: #38bdf8; font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;">⚙️ PC HYBRID-COMBINE MODE</span>
+            </div>
+            
+            <h3 id="question-text" style="line-height: 1.6; font-size: 1.5rem; margin-bottom: 45px; font-weight: 600; word-break: keep-all;">문제를 불러오는 중입니다...</h3>
+            
+            <div id="quiz-options" class="options-grid"></div>
+        </div>
+
+        <!-- 3. 결과 및 결제 유도 스크린 -->
+        <div id="result-screen" class="screen hidden">
+            
+            <!-- 🛑 카드 결제 유도 유니트 -->
+            <div id="payment-zone" style="text-align: center; max-width: 650px; margin: 0 auto; padding: 20px 0; width: 100%;">
+                <h2 style="color: #f59e0b; margin-bottom: 20px; font-size: 1.7rem; font-weight: bold; line-height: 1.4;">⚠️ 고밀도 하이브리드 연산 완료<br>및 클라우드 트래픽 비용 안내</h2>
+                
+                <p style="font-size: 1.05rem; line-height: 1.75; color: #94a3b8; text-align: left; margin-bottom: 30px; word-break: keep-all;">
+                    귀하의 기본 정답 가중치(정답당 5점) 및 타임 레이스 가산점(최대 5점) 융합 연산 결과 도출이 성공적으로 마감되었습니다. 국제 표준 협회 규정에 의거하여, PC 고해상도 위조 방지 직인이 포함된 <strong>[정식 공인 MI 지능 인증 리포트]</strong>의 중앙 데이터베이스 보존 및 세션 유지 비용 <span style="color: #ef4444; font-weight: bold; text-decoration: underline;">4,000원</span>이 최종 청구됩니다.
+                </p>
+
+                <div id="payment-trigger-buttons" style="display: flex; gap: 16px; margin-bottom: 40px;">
+                    <button class="btn-primary" style="background: #f59e0b; color: #0f172a; font-weight: bold; flex: 1;" onclick="openFakeForm()">4,000원 결제 및 라이센스 즉시 발급</button>
+                    <button class="btn-primary" style="background: #1e293b; color: #64748b; width: auto; padding: 20px 30px; border: 1px solid #334155;" onclick="cancelPayment()">결제 취소</button>
+                </div>
+
+                <!-- 💳 페이크 결제 폼 -->
+                <div id="fake-credit-card-form" class="hidden" style="background: #1e293b; border: 1px solid #334155; padding: 30px; border-radius: 16px; margin-bottom: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
+                    <div style="text-align: left; border-bottom: 1px solid #334155; padding-bottom: 12px; margin-bottom: 24px;">
+                        <span style="font-size: 1.05rem; font-weight: bold; color: #38bdf8;">💳 신용/체크카드 인증결제 (초고속 보안 암호화망)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>카드 승인 명의자 이름</label>
+                        <input type="text" id="pay-name" class="form-input" placeholder="홍길동">
+                    </div>
+
+                    <div class="form-group">
+                        <label>디지털 이메일 주소 (정식 파일 전송용)</label>
+                        <input type="email" id="pay-email" class="form-input" placeholder="example@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>카드 번호 16자리</label>
+                        <input type="text" id="pay-card" class="form-input" placeholder="0000 - 0000 - 0000 - 0000" maxlength="19">
+                    </div>
+
+                    <div style="display: flex; gap: 16px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>만료일 (MM/YY)</label>
+                            <input type="text" class="form-input" placeholder="MM / YY" maxlength="5">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>비밀번호 앞 두자리</label>
+                            <input type="password" class="form-input" placeholder="●●" maxlength="2">
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" style="background: #ef4444; margin-top: 15px; margin-bottom: 20px;" onclick="tryFakePay()">일반 신용카드 4,000원 결제 요청</button>
+                    
+                    <div style="border-top: 1px dashed #334155; padding-top: 20px; margin-top: 10px;">
+                        <span style="font-size: 0.85rem; color: #64748b; display: block; margin-bottom: 10px;">* 교육/공공기관 제휴 승인 대상자 및 2026 무료 이벤트 참가자 전용</span>
+                        <button class="btn-primary" style="background: #10b981; color: #fff; font-size: 1.05rem;" onclick="revealTruth()">🎁 공공 세션 제휴 / 무료 결제 최종 승인 (0원)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎁 찐 반전 대시보드 스페이스 -->
+            <div id="free-gift" class="hidden" style="display: flex; flex-direction: column; gap: 35px; max-width: 750px; margin: 0 auto; width: 100%;">
+                <div style="border: 2px solid var(--success-color); padding: 30px; border-radius: 16px; text-align: center; background: rgba(74, 222, 128, 0.03);">
+                    <h3 style="color: var(--success-color); margin-bottom: 10px; font-size: 1.6rem; font-weight: bold;">🎉 완벽하게 낚이셨습니다! 실제론 공짜!</h3>
+                    <p style="font-size: 1rem; color: #94a3b8; margin-bottom: 22px;">보안 입력된 카드정보는 가짜 폼이라 유출될 걱정이 절대 없으니 안심하세요ㅋㅋㅋ<br>아래에 진짜 발급받을 이름만 넣어서 챙겨가세요!</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 14px; max-width: 450px; margin: 0 auto; width: 100%;">
+                        <input type="text" id="user-name-input" placeholder="인증서에 새길 본명 기입" style="padding: 18px; border-radius: 12px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 1.1rem; text-align: center; outline: none;">
+                        <button class="btn-primary" style="background: var(--success-color); color: #0f172a; font-weight: bold;" onclick="generateCertificate()">🏅 고해상도 오피셜 인증서 다운로드</button>
+                    </div>
+                </div>
+
+                <!-- 분석 대시보드 (풀이 점수 + 시간 가산점 결합단) -->
+                <div style="text-align: center; border-top: 1px solid #1e293b; padding-top: 30px;">
+                    <h1 style="font-size: 1.6rem; font-weight: bold; letter-spacing: -0.5px;">최종 하이브리드 인지 연산 리포트</h1>
+                    
+                    <!-- 합산 점수 최종 표기 영역 (예: 54.12점) -->
+                    <div id="result-score" class="result-score">0점</div>
+                    
+                    <div id="result-breakdown" style="font-size: 1.15rem; color: #38bdf8; margin-bottom: 10px;">
+                        기본 점수: 0점 / 시간 보너스: +0.00점
+                    </div>
+                    <div id="result-time" style="font-size: 1.05rem; color: #94a3b8; margin-bottom: 25px; font-family: monospace;">
+                        순수 문항 돌파 소요 시간: 계산 중...
+                    </div>
+                    <div id="result-tier" class="result-tier">연산 완료</div>
+                    
+                    <p id="result-desc" style="color: #94a3b8; font-size: 1.05rem; line-height: 1.75; margin-bottom: 35px; text-align: left; word-break: keep-all; padding: 0 10px;"></p>
+
+                    <button class="btn-primary" style="background: #334155; color: #94a3b8; max-width: 300px; margin: 0 auto;" onclick="location.reload()">처음으로 가기</button>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="certCanvas" width="800" height="1100" style="display: none;"></canvas>
+
+    </div>
+
+    <script>
+        const quizData = [
+            { q: "1. 수열의 규칙을 파악하세요. [ 2, 6, 12, 20, 30, ? ]", o: ["36", "40", "42", "48"], a: 2 },
+            { q: "2. 다음 중 나머지 셋과 성격이 가장 다른 단어는 무엇입니까?", o: ["구리", "철", "은", "유리"], a: 3 },
+            { q: "3. '노력'과 '결과'의 관계는 '충전'과 무엇의 관계와 가장 유사합니까?", o: ["배터리", "방전", "스마트폰", "전기"], a: 0 },
+            { q: "4. 단어를 재배열했을 때 국가 이름이 되지 않는 것은?", o: ["A N C E F R", "A P N A J", "O R K E A", "P L P E A"], a: 3 },
+            { q: "5. 형과 동생의 나이를 합하면 32살입니다. 형은 동생보다 6살이 많습니다. 동생은 몇 살입니까?", o: ["11살", "13살", "14살", "16살"], a: 1 },
+            { q: "6. 어떤 수에 4를 곱하고 8을 뺀 값이 24입니다. 어떤 수는 무엇입니까?", o: ["6", "7", "8", "9"], a: 2 },
+            { q: "7. [ 책, 도서관 ]의 관계와 가장 밀접한 쌍은?", o: ["물고기, 어항", "의사, 병원", "비행기, 활주로", "나무, 숲"], a: 3 },
+            { q: "8. 수열의 규칙을 파악하세요. [ 3, 9, 27, 81, ? ]", o: ["162", "243", "324", "412"], a: 1 },
+            { q: "9. 아래 도형 연산 규칙을 만족하는 숫자는? [ (▲+▲)×■ = 24 ], 단 ▲는 3입니다. ■는?", o: ["2", "4", "6", "8"], a: 1 },
+            { q: "10. 세 개의 주사위를 동시에 던질 때, 모든 주사위가 같은 숫자가 나올 확률의 분모는?", o: ["6", "36", "216", "1296"], a: 2 },
+            { q: "11. 사과 5개가 들어있는 상자 4개의 무게가 총 24kg입니다. 상자 하나의 무게가 1kg일 때, 사과 1개의 평균 무게는?", o: ["1kg", "2kg", "3kg", "4kg"], a: 0 },
+            { q: "12. 다음 중 단어의 철자 배열 규칙이 다른 하나는?", o: ["LEVEL", "RADAR", "ROTOR", "APPLE"], a: 3 },
+            { q: "13. 수열 패턴 분석: [ 1, 4, 9, 16, 25, ? ]", o: ["30", "36", "42", "49"], a: 1 },
+            { q: "14. A는 B보다 키가 크고, B는 C보다 키가 큽니다. C는 D보다 키가 작고, D는 B보다 키가 작습니다. 가장 키가 큰 사람은?", o: ["A", "B", "C", "D"], a: 0 },
+            { q: "15. 시침과 분침이 하루(24시간) 동안 정확히 수직(90도)을 이루는 횟수의 근사치는?", o: ["22회", "44회", "48회", "50회"], a: 1 },
+            { q: "16. 영희는 숲속을 걷다가 동쪽으로 3km, 북쪽으로 4km 이동했습니다. 처음 위치에서의 직선거리는?", o: ["5km", "6km", "7km", "12km"], a: 0 },
+            { q: "17. 다음 문장의 빈칸에 들어갈 단어는? [ '낮'이 '빛'이면, '밤'은 ( )이다. ]", o: ["어둠", "달", "별", "잠"], a: 0 },
+            { q: "18. 수열 규칙 분석: [ 100, 98, 94, 88, 80, ? ]", o: ["72", "70", "68", "64"], a: 1 },
+            { q: "19. 톱니바퀴 A(톱니 12개)가 3바퀴 회전할 때, 맞물린 톱니바퀴 B(톱니 9개)는 몇 바퀴 회전합니까?", o: ["3바퀴", "4바퀴", "5바퀴", "6바퀴"], a: 1 },
+            { q: "20. 마지막 문항 (공간추론): 주사위를 펼친 전개도에서 마주 보는 면의 눈의 합은 항상 얼마입니까?", o: ["5", "6", "7", "8"], a: 2 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let correctCount = 0; 
+
+        // 🚨 배점 정밀 수정 구역
+        let startTime = 0;
+        let totalElapsedSeconds = 0; 
+        let timeStringFormatted = ""; 
+        let baseScore = 0;        // 풀이 점수 (개당 5점 -> 최대 100점)
+        let timeBonusScore = 0;   // 시간 보너스 점수 (최대 5점)
+        let finalCombinedScore = 0; // 합산 점수
+        let currentTierText = "";
+
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            window.scrollTo(0, 0);
+            currentQuestionIndex = 0;
+            correctCount = 0;
+            
+            startTime = Date.now(); 
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.length) {
+                totalElapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+                
+                const mins = Math.floor(totalElapsedSeconds / 60);
+                const secs = totalElapsedSeconds % 60;
+                timeStringFormatted = mins > 0 ? `${mins}분 ${secs}초` : `${secs}초`;
+
+                calculateHybridScore();
+                return;
+            }
+            const currentQuiz = quizData[currentQuestionIndex];
+            document.getElementById('question-progress').innerText = `문항: ${currentQuestionIndex + 1} / ${quizData.length}`;
+            document.getElementById('question-text').innerText = currentQuiz.q;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            currentQuiz.o.forEach((optionText, index) => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option-btn';
+                button.innerText = optionText;
+                button.onclick = () => handleAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function handleAnswer(selectedIndex) {
+            const currentQuiz = quizData[currentQuestionIndex];
+            if (selectedIndex === currentQuiz.a) { 
+                correctCount++; 
+            }
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function calculateHybridScore() {
+            // 1️⃣ 기본 풀이 점수 보정: 개당 5점 (20문제 다 맞히면 100점 만점)
+            baseScore = correctCount * 5;
+
+            // 2️⃣ 시간 보너스 연산: 최대 5점 만점 스케일링
+            const minTimeBound = 180;  // 3분 이내 컷 = 만점 (+5점)
+            const maxTimeBound = 900;  // 15분 이상 소요 = 최하점 (+0점)
+
+            if (totalElapsedSeconds <= minTimeBound) {
+                timeBonusScore = 5.0;
+            } else if (totalElapsedSeconds >= maxTimeBound) {
+                timeBonusScore = 0.0;
+            } else {
+                const timeRange = maxTimeBound - minTimeBound;
+                const userProgress = totalElapsedSeconds - minTimeBound;
+                timeBonusScore = 5.0 * (1 - (userProgress / timeRange));
+            }
+
+            // 3️⃣ 최종 합산 점수 도출 (소수점 둘째자리까지 표기해서 54.12점처럼 출력)
+            finalCombinedScore = parseFloat((baseScore + timeBonusScore).toFixed(2));
+
+            // 등급 평가 밸런싱 (최대 105점 스케일 기준 트리거)
+            let tier = "";
+            let desc = "";
+
+            if (finalCombinedScore >= 85) { 
+                tier = "🎓 하이클래스 브레인 (MASTER)"; 
+                desc = "높은 문제 이해도와 정밀한 주파 속도를 동시에 만족하는 최상위권 데이터 세션입니다. 인지 왜곡 트릭에 걸리지 않고 신속하게 마감했습니다."; 
+            } else if (finalCombinedScore >= 45) { 
+                tier = "⚖️ 일반 안정권 지수 (NORMAL)"; 
+                desc = "가장 이상적이고 견고한 밸런스를 가진 제어 회로입니다. 평균적인 오차 범위 내에서 논리 연산을 규칙적으로 수행 완료하였습니다."; 
+            } else { 
+                tier = "📉 연산 과부하 상태 (DOWNTIME)"; 
+                desc = "문항 트릭 디코딩 속도가 다소 정체되었거나 오답 필터링 단계에서 지연이 발생했습니다. 충분한 휴식 후 재시도를 권장합니다."; 
+            }
+
+            currentTierText = tier;
+
+            // 최종 뷰어단 바인딩
+            document.getElementById('result-score').innerText = `${finalCombinedScore}점`;
+            document.getElementById('result-breakdown').innerText = `기본 점수: ${baseScore}점 (정답 ${correctCount}개) / 시간 보너스: +${timeBonusScore.toFixed(2)}점`;
+            document.getElementById('result-time').innerText = `순수 문항 돌파 소요 시간: ${timeStringFormatted}`;
+            
+            document.getElementById('result-tier').innerText = tier;
+            document.getElementById('result-desc').innerText = desc;
+
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function cancelPayment() {
+            alert("결제가 안전하게 취소되었습니다. 대기 세션 만료로 인해 초기 화면으로 유턴합니다.");
+            location.reload();
+        }
+
+        function openFakeForm() {
+            document.getElementById('payment-trigger-buttons').classList.add('hidden');
+            document.getElementById('fake-credit-card-form').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('fake-credit-card-form').scrollIntoView({ behavior: 'smooth' });
+            }, 120);
+        }
+
+        function tryFakePay() {
+            const name = document.getElementById('pay-name').value.trim();
+            const email = document.getElementById('pay-email').value.trim();
+            const card = document.getElementById('pay-card').value.trim();
+
+            if(!name || !email || !card) {
+                alert("안전 승인을 위한 결제 정보 명세(이름, 이메일, 카드일련번호)를 빠짐없이 기입해 주세요.");
+                return;
+            }
+            alert("🔒 외부 금융망 연동 트래픽 한도초과 (오류코드: ERR_PG_LIMIT_2026)\n현재 무상 지원 세션이 개방되어 있으니 하단의 '무료 결제' 트랙을 승인해 주십시오.");
+        }
+
+        function revealTruth() {
+            document.getElementById('payment-zone').classList.add('hidden');
+            document.getElementById('free-gift').classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            const writtenName = document.getElementById('pay-name').value.trim();
+            if(writtenName) {
+                document.getElementById('user-name-input').value = writtenName;
+            }
+        }
+
+        function generateCertificate() {
+            const userName = document.getElementById('user-name-input').value.trim();
+            if (!userName) {
+                alert("인증서 명의란에 새길 이름을 입력하십시오.");
+                return;
+            }
+
+            const canvas = document.getElementById('certCanvas');
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = '#fcfbf7';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#c5a880';
+            ctx.lineWidth = 14;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            ctx.fillStyle = '#1e293b';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 55px serif';
+            ctx.fillText('인 증 서', canvas.width / 2, 170);
+
+            ctx.fillStyle = '#334155';
+            ctx.font = '24px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(`성 명: ${userName}`, 100, 310);
+            ctx.fillText(`검사 종류: 2026 공인 MI 복합 하이브리드 검사`, 100, 365);
+            ctx.fillText(`종합 스코어: 종합 ${finalCombinedScore} 점 (기본 ${baseScore} + 보너스 ${timeBonusScore.toFixed(2)})`, 100, 420);
+            ctx.fillText(`소요 시간: 총 ${timeStringFormatted} (정답 개수: ${correctCount}개)`, 100, 475);
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 32px sans-serif';
+            ctx.fillText(`최종 판정 등급: ${currentTierText}`, canvas.width / 2, 630); 
+
+            ctx.font = '22px serif';
+            ctx.fillText('위 사람은 마지막 4,000원 보존 비용 청구라는 정밀한 카드 결제 낚시', canvas.width / 2, 750);
+            ctx.fillText('트릭을 발견하고 하단의 무료 결제 찬스를 간파하여 통과하였기에', canvas.width / 2, 800);
+            ctx.fillText('상기 지수의 뛰어난 순간 기지와 뇌지컬을 인정하여 이 인증서를 수여함.', canvas.width / 2, 850);
+
+            try {
+                const imageURI = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = `MI_종합인증서_${userName}.png`;
+                link.href = imageURI;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                setTimeout(() => {
+                    if (confirm("파일 다운로드가 감지되지 않았습니까?\n그렇다면 확인 버튼을 눌러 새 탭에서 열린 이미지를 마우스 우클릭 혹은 길게 눌러 저장하십시오.")) {
+                        const newWindow = window.open();
+                        if (newWindow) {
+                            newWindow.document.write(`<img src="${imageURI}" style="width:100%; max-width:800px; display:block; margin:0 auto;" /><p style="text-align:center; font-weight:bold; margin-top:20px;">마우스 우클릭하여 다른 이름으로 저장 혹은 이미지를 길게 누르십시오.</p>`);
+                        } else {
+                            alert("브라우저 팝업 차단이 활성화되어 있습니다. 차단을 해제해 주세요.");
+                        }
+                    }
+                }, 500);
+            } catch (e) {
+                alert("정식 브라우저 환경에서 재시도 해주십시오.");
+                console.error(e);
+            }
+        }
+    </script>
+</body>
+</html>
