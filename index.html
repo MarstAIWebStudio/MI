@@ -176,12 +176,12 @@
 
                 <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 30px;">
 
-                <h3 style="font-size: 1.3rem; color: #0f172a; margin-bottom: 12px; border-left: 5px solid #0f172a; padding-left: 10px;">📋 1. 검사 주관 및 시스템 개요</h3>
+                <h3 style="font-size: 1.3rem; color: #0f172a; margin-bottom: 12px; border-left: 5px solid #0f172a; padding-left: 10px;">📋 검사 주관 및 시스템 개요</h3>
                 <table class="spec-table" style="margin-bottom: 35px;">
                     <tr><th>평가 주관</th><td style="color:#0f172a; font-weight:700;">국제 인지능력 평가 연합 산하 고지능 연산 분과위원회</td></tr>
                     <tr><th>시스템 아키텍처</th><td>MI-Hybrid Frame Engine v5.1 (2026 Perfect Edition)</td></tr>
-                    <tr><th>문항 구성 및 스케일</th><td>총 20개 문항 (기본 정답 100점 만점 + 타임 가산 보너스 5점 만점)</td></tr>
-                    <tr><th>평가 배점 가중치</th><td style="color: #2563eb; font-weight: bold;">정답당 5점 부여 + 소요 시간 연산 보정 최대 5점 합산</td></tr>
+                    <tr><th>문항 구성 및 스케일</th><td>총 20개 문항 (기본 정답 200점 만점 + 타임 가산 보너스 5점 만점)</td></tr>
+                    <tr><th>평가 배점 가중치</th><td style="color: #2563eb; font-weight: bold;">정답당 10점 부여 + 소요 시간 연산 보정 최대 5점 합산</td></tr>
                 </table>
 
                 <button class="btn-primary" style="background: #0f172a; font-size: 1.25rem; padding: 22px;" onclick="startQuiz()">서약 동의 및 PC 풀프레임 검사 시작</button>
@@ -381,7 +381,7 @@
 
         function calculateHybridScore() {
             // 1️⃣ 기본 풀이 점수 보정: 개당 5점 (20문제 다 맞히면 100점 만점)
-            baseScore = correctCount * 5;
+            baseScore = correctCount * 10;
 
             // 2️⃣ 시간 보너스 연산: 최대 5점 만점 스케일링
             const minTimeBound = 180;  // 3분 이내 컷 = 만점 (+5점)
